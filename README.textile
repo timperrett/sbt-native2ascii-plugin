@@ -13,6 +13,14 @@ Add the plugin to your Plugins.scala within your project:
   }
 </code></pre>
 
+...and then mix the Native2Ascii trait into your project:
+
+<pre><code>
+  class SampleProject(info: ProjectInfo) extends DefaultWebProject(info) with Native2AsciiPlugin {
+    ...
+  }
+</code></pre>
+
 Ensure you have all your localization .txt files in src/main/i18n and by default they will be translated into your application resources folder in src/main/resources.
 
 Then, from your SBT prompt just hit:
