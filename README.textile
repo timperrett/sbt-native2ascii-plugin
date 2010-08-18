@@ -1,0 +1,55 @@
+h1. Native2Ascii Plugin for SBT
+
+This is a direct port of the maven plugin for the native2ascii tool provided as part of the JDK
+
+h2. Usage
+
+Add the plugin to your Plugins.scala within your project:
+
+<pre><code>
+  import sbt._
+  class Plugins(info: ProjectInfo) extends PluginDefinition(info) {
+    val native2ascii = "eu.getintheloop" % "sbt-native2ascii-plugin" % "0.1.0"
+  }
+</code></pre>
+
+Ensure you have all your localization .txt files in src/main/i18n and by default they will be translated into your application resources folder in src/main/resources.
+
+Then, from your SBT prompt just hit:
+
+<code>
+  > native2ascii
+</code>
+
+All being well you should then see something like:
+
+<pre><code>
+  [info] == native2ascii ==
+  [info] Encoding '.txt' to '.properties' file(s) in src/main/resources
+  [info] Translation complete.
+  [info] == native2ascii ==
+</code></pre>
+
+h2. Options 
+
+Override any of the following methods to change the default behaviour:
+
+
+By default this plugin expects your input translation files to be UTF-8 encoded. Change this setting to affect the encoding passed to native2ascii
+<code>def encoding: String = "UTF-8"</code>
+
+
+Where should native2ascii look for you r
+<code>def translationInputPath: Path = mainSourcePath / "i18n"</code>
+
+
+The file extension of your input translation texts (the ones located in translationInputPath)
+<code>def translationInputExtension: String = "txt"</code>
+
+
+The file location to place the escaped translation files
+<code>def translationOutputPath: Path = mainResourcesPath</code>
+
+
+The file extension of your output translations 
+<code>def translationOutputExtension: String = "properties"</code>
